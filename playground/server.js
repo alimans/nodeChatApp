@@ -13,15 +13,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 io.on('connection', (socket) => {
   console.log('a client connected:');
 
-  socket.emit('newMessage', {
-    from: 'somebody',
-    text: 'some text from somebody',
-    createdAt: 34523
+//
+  socket.on('SaySth', (saying) => {
+    console.log(saying);
+    socket.emit('Mes', `got your data `);
   });
-
-  socket.on('createMessage', (data) => {
-    console.log(data);
-  });
+//
 
   socket.on('disconnect', () => {
     console.log('one client disconnected');
