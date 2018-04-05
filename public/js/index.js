@@ -6,8 +6,23 @@ socket.on('connect', function () {
 
 socket.on('newMessage', function (data) {
   console.log(data);
+
+  var li = $('<li></li>');
+  li.text(`${data.from}: ${data.text}`);
+  $('#messages').append(li);
 });
 
 socket.on('disconnect', function () {
   console.log('disconnected from server');
+});
+
+$('#message-form').on('submit', function (e) {
+  e.preventDefault();
+
+  socket.emit('createMessage', {
+    from: 'Ali',
+    text: $('[name = message]').val()
+  }, function () {
+
+  });
 });
